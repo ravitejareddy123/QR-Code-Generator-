@@ -3,8 +3,8 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "QR Code Generator",
-  description: "Generate beautiful QR codes and download as PNG or SVG.",
+  title: "Beautiful QR Code Generator",
+  description: "Generate premium QR codes and download as PNG or SVG.",
 };
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>{children}</body>
 
-      {/* Load AdSense only when client is configured */}
+      {/* AdSense script (loads only if client id exists) */}
       {client ? (
         <Script
           id="adsense-script"

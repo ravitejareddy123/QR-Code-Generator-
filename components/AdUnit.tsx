@@ -3,30 +3,22 @@
 import { useEffect } from "react";
 
 type Props = {
-  slot: string; // Ad unit slot id from AdSense
-  format?: "auto" | "rectangle" | "horizontal" | "vertical";
-  style?: React.CSSProperties;
+  slot: string; // Your AdSense ad unit slot id (numbers)
   className?: string;
+  style?: React.CSSProperties;
 };
 
-export default function AdUnit({
-  slot,
-  format = "auto",
-  style,
-  className,
-}: Props) {
+export default function AdUnit({ slot, className, style }: Props) {
   useEffect(() => {
     try {
       // @ts-ignore
       (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (e) {
-      // ignore in dev / blocked environments
+    } catch {
+      // Ad blockers / localhost may cause this; ignore safely
     }
   }, []);
 
   const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
-
-  // If env var missing, hide ad unit (dev safe)
   if (!client) return null;
 
   return (
@@ -35,7 +27,7 @@ export default function AdUnit({
       style={{ display: "block", ...style }}
       data-ad-client={client}
       data-ad-slot={slot}
-      data-ad-format={format}
+      data-ad-format="auto"
       data-full-width-responsive="true"
     />
   );
